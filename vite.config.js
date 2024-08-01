@@ -8,6 +8,15 @@ export default defineConfig({
       input: ['resources/css/app.css', 'resources/js/app.js'],
       refresh: true,
     }),
-  ]
+    ],
+    build: {
+        outDir: 'public/build',
+        assetsDir: 'assets',
+        rollupOptions: {
+            output: {
+                assetFileNames: '[name].[hash].[ext]'
+            }
+        }
+    }
 });
 
