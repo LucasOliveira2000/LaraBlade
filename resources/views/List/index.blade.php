@@ -4,9 +4,30 @@
 @section('title', 'Lista de Atividades')
 @section('content')
 
-<div>
-    <a {{ request()->routeIs('list.create') ? 'active' : '' }} href="{{ route('list.create') }}"> Cadastrar Atividade </a>
+<div class="text-center mt-5">
+    <a href="{{ route('list.create') }}" class="btn btn-primary">
+        Cadastrar Atividade
+    </a>
 </div>
 
+<div class="container mt-5">
+    <div class="row">
+        @foreach ($lists as $list)
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        {{ $list->titulo }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ $list->descricao }}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        há {{ $list->created_at->diffForHumans() }}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 @endsection

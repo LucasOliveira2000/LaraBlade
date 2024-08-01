@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\ToDoList;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class ToDoListController extends Controller
 {
@@ -13,8 +16,15 @@ class ToDoListController extends Controller
      */
     public function index()
     {
+        try{
+            $lists = ToDoList::all();
+        }catch(ModelNotFoundException){
+            return redirect()->route("list.index")->with("Você não tem nenhuma tarefa", "error");
+        }
+
         return view("List.index",[
-            "title"    => "Atividades"
+            "title"    => "Atividades",
+            "lists"    => $lists
         ]);
     }
 
@@ -37,7 +47,21 @@ class ToDoListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teste = $request->validate([
+            "titulo"      => "required|max:30|min:3",
+            "descricao"   => "required|max:150|min:3"
+        ],[
+            "titulo.required"       => "Esse campo é obrigatório",
+            "descricao.required"    => "Esse campo é obrigatório"
+        ]);
+
+        $makeList = ToDoList::create([
+            // "user_id"   => Auth::user()->id,
+            "titulo"    => $request->titulo,
+            "descricao" => $request->descricao
+        ]);
+
+        return to_route("list.index")->with("Atividade ".$makeList->titulo."criada com sucesso", "success");
     }
 
     /**

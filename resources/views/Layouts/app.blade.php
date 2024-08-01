@@ -7,8 +7,9 @@
    <title>@yield('title', 'My Laravel App')</title>
    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body style="background: url('{{ asset('back3.png') }}')">
+<body style="background: url('{{ asset('back1.png') }}')">
     <nav class="navbar navbar-expand-lg p-3 border border-3 rounded-bottom-5 bg-dark justify-content-center">
+        {{-- <img src="{{asset("Logo.png")}}" width="50px"> --}}
         <div class="container-fluid justify-content-center">
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="nav nav-tabs text-white" id="myTab" role="tablist">
