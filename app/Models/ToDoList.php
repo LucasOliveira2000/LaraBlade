@@ -11,7 +11,7 @@ class ToDoList extends Model
     use HasFactory;
 
     protected $fillable = [
-        // 'user_id',
+        'user_id',
         'titulo',
         'descricao'
     ];

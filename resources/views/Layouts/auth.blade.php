@@ -18,14 +18,16 @@
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="nav nav-tabs text-white" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link {{ request()->routeIs('site.home') ? 'active' : '' }}" href="{{ route('site.home') }}" role="tab" aria-selected="true">Home</a>
+                  <a class="nav-link " href="{{ route('list.index') }}" role="tab" aria-selected="true">Atividades</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link {{ request()->routeIs('list.index') ? 'active' : '' }}" href="{{ route('list.index') }}" role="tab" aria-selected="true">Atividades</a>
+                    <form action="{{ route('user.destroy') }}" method="POST" class="form" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="nav-link " role="tab" aria-selected="true">Logout</button>
+                    </form>
                 </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link {{ request()->routeIs('user.login') ? 'active' : '' }}" href="{{ route('user.login') }}" role="tab" aria-selected="true">Login</a>
-                </li>
+
             </ul>
           </div>
         </div>

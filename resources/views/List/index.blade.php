@@ -1,7 +1,6 @@
-<!-- resources/views/welcome.blade.php -->
-@extends('Layouts.app')
+@extends('Layouts.auth')
 
-@section('title', 'Lista de Atividades')
+@section('title', $title)
 @section('content')
 
 <div class="text-center mt-5">
@@ -27,6 +26,10 @@
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <div class="pagination-container d-flex justify-content-center mt-5">
+        {{ $lists->links('pagination::bootstrap-5') }}
     </div>
 </div>
 
