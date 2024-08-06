@@ -41,7 +41,7 @@
             <label class="form-check-label" for="remember">Lembrar de mim</label>
         </div>
         <div class="d-grid gap-2 col-5 mx-auto mt-4">
-            <button type="submit" class="btn btn-primary rounded-5 rounded-bottom-1">
+            <button type="submit" class="btn btn-primary rounded-5 rounded-bottom-1 custom-orange">
                 Enviar
             </button>
         </div>
@@ -54,3 +54,17 @@
 </div>
 
 @endsection
+
+<style>
+    .custom-orange {
+        background-color: #ff8c00 !important; /* Orange */
+        border-color: #ff8c00 !important; /* Orange */
+        color: #fff !important; /* White */
+    }
+
+    .custom-orange:hover {
+        background-color: #e67e22 !important; /* Darker Orange */
+        border-color: #e67e22 !important; /* Darker Orange */
+        color: #fff !important; /* White */
+    }
+</style>
