@@ -59,6 +59,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" >
+                            <i class="fas fa-user"></i> {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <form action="{{ route('user.destroy') }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')

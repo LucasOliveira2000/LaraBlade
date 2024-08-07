@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ToDoList extends Model
@@ -13,7 +14,8 @@ class ToDoList extends Model
     protected $fillable = [
         'user_id',
         'titulo',
-        'descricao'
+        'descricao',
+        'ativo'
     ];
 
     protected static function boot()

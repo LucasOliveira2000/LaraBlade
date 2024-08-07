@@ -12,7 +12,9 @@ Route::middleware(["autenticador"])->controller(ToDoListController::class)->pref
     Route::get("/index", "index")->name("list.index");
     Route::get("/create", "create")->name("list.create");
     Route::get("/edit/{uuid}", "edit")->name("list.edit");
+    Route::get("/atividadesConcluidas", "atividadesConcluidas")->name("list.atividadesConcluidas");
     Route::post("/store", "store")->name("list.store");
+    Route::patch("/concluir/{uuid}", "concluir")->name("list.concluir");
     Route::post("/update/{uuid}", "update")->name("list.update");
     Route::delete("/destroy/{uuid}", "destroy")->name("list.destroy");
 });

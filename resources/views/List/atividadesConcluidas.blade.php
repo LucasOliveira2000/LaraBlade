@@ -5,10 +5,10 @@
 
 <div class="text-center mt-5">
     <a href="{{ route('list.create') }}" class="btn btn-primary custom-orange">
-        <i class="fa-solid fa-plus"></i> Cadastrar Atividade
+        Cadastrar Atividade
     </a>
     <a href="{{ route('list.atividadesConcluidas') }}" class="btn btn-primary custom-orange">
-        <i class="fa-solid fa-bell g-2"></i> Atividades Concluídas
+        <i class="fa-solid fa-bell g-2"> {{ $quantidade }} </i>  Atividades Concluídas
     </a>
 </div>
 
@@ -24,17 +24,11 @@
                             </div>
                             <div class="col-8 d-flex flex-column">
                                 <div class="card-body flex-grow-1">
-                                    <h5 class="card-title text-center border-bottom">{{ $list->titulo }}</h5>
+                                    <h5 class="card-title text-center border-bottom text-success">{{ $list->titulo }}</h5>
                                     <p class="card-text mt-3">{{ $list->descricao }}</p>
-                                    <p class="card-text mt-4"><small class="text-muted">há {{ $list->created_at->diffForHumans() }}</small></p>
+                                    <p class="card-text mt-4"><small class="text-muted">Concluído há {{ $list->created_at->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-between align-items-center p-3 gap-1">
-                                    <form action="{{ route('list.concluir', ['uuid' => $list->uuid]) }}" method="POST" class="d-grid gap-2 col-6 mx-auto">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn custom-orange  mb-2 flex-grow-1 d-grid">Concluir</button>
-                                    </form>
-                                    <a href="{{ route('list.edit', ['uuid' => $list->uuid]) }}" class="btn btn-secondary mb-2 me-2 flex-grow-1">Editar</a>
                                     <form action="{{ route('list.destroy', ['uuid' => $list->uuid]) }}" method="POST" class="d-grid gap-2 col-6 mx-auto">
                                         @csrf
                                         @method('DELETE')

@@ -14,7 +14,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label text-black fs-5">Descrição da Atividade</label>
-                <textarea class="form-control rounded-5 border-1 no-resize" name="descricao" placeholder="Estudar a estrutura e o básico do Docker." rows="5" readonly></textarea>
+                <textarea class="form-control rounded-5 border-1 no-resize" name="descricao" placeholder="Estudar a estrutura e o básico do Docker." rows="5"></textarea>
             </div>
             <div class="d-grid gap-2 mt-4">
                 <button type="submit" class="btn btn-primary rounded-5 rounded-bottom-1 custom-orange">

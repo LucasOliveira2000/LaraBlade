@@ -16,14 +16,42 @@ class ToDoListController extends Controller
     public function index()
     {
         try {
-            $lists = ToDoList::where("user_id", Auth::user()->id)->paginate(6);
+            $lists = ToDoList::where("user_id", Auth::user()->id)->where("ativo", 1)->paginate(6);
         } catch (ModelNotFoundException $e) {
             return redirect()->route("list.index")->with("message", "Você não tem nenhuma tarefa");
         }
 
+        $mostrarQuantidade = count($lists);
+
+        if($mostrarQuantidade >= 0 ){
+            $quantidade = $mostrarQuantidade;
+        }
+
         return view("List.index", [
-            "title"    => "Lista de Atividades",
-            "lists"    => $lists
+            "title"         => "Lista de Atividades",
+            "lists"         => $lists,
+            "quantidade"    => $quantidade
+        ]);
+    }
+
+    public function atividadesConcluidas()
+    {
+        try {
+            $lists = ToDoList::where("user_id", Auth::user()->id)->where("ativo", 0)->paginate(6);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route("list.")->with("message", "Você não tem nenhuma tarefa concluída");
+        }
+
+        $mostrarQuantidade = count($lists);
+
+        if($mostrarQuantidade >= 0 ){
+            $quantidade = $mostrarQuantidade;
+        }
+
+        return view("List.atividadesConcluidas", [
+            "title"         => "Lista de Atividades Concluídas",
+            "lists"         => $lists,
+            "quantidade"    => $quantidade
         ]);
     }
 
@@ -140,5 +168,24 @@ class ToDoListController extends Controller
         $list->delete();
 
         return redirect()->back()->with("message", "Atividade " . $list->titulo . " deletada com sucesso");
+    }
+
+    public function concluir($uuid)
+    {
+        try {
+            $list = ToDoList::where('uuid', $uuid)->firstOrFail();
+        } catch (ModelNotFoundException) {
+            return redirect()->back()->with('message', 'Atividade não encontrada!');
+        }
+
+        if(!isset($list)){
+            return redirect()->back()->with("message", "Atividade não encontrada!");
+        }
+
+        $list->update([
+            "ativo" => 0
+        ]);
+
+        return redirect()->route('list.index')->with('message', 'Atividade ' . $list->titulo . ' concluida com sucesso');
     }
 }
