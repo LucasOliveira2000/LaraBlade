@@ -8,12 +8,13 @@ Route::get('/', function () {
     return view('Site.home');
 })->name('site.home');
 
-Route::middleware(["autenticador"])->controller(ToDoListController::class)->prefix("list")->group( function(){
+Route::middleware(["autenticador"])->controller(ToDoListController::class)->prefix("list")->group(function(){
     Route::get("/index", "index")->name("list.index");
     Route::get("/create", "create")->name("list.create");
-    Route::get("/edit", "edit")->name("list.edit");
+    Route::get("/edit/{uuid}", "edit")->name("list.edit");
     Route::post("/store", "store")->name("list.store");
-    Route::put("/update", "update")->name("list.update");
+    Route::post("/update/{uuid}", "update")->name("list.update");
+    Route::delete("/destroy/{uuid}", "destroy")->name("list.destroy");
 });
 
 Route::controller(UserController::class)->prefix("user")->group( function(){

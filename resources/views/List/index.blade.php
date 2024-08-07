@@ -26,9 +26,13 @@
                                     <p class="card-text mt-4"><small class="text-muted">há {{ $list->created_at->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-between align-items-center p-3">
-                                    <a href="{{ route('list.create') }}" class="btn btn-primary mb-2 me-2 flex-grow-1 custom-orange">Concluir</a>
-                                    <a href="{{ route('list.create') }}" class="btn btn-secondary mb-2 me-2 flex-grow-1">Editar</a>
-                                    <a href="{{ route('list.create') }}" class="btn btn-danger mb-2 flex-grow-1">Deletar</a>
+                                    <a class="btn btn-primary mb-2 me-2 flex-grow-1 custom-orange conclude-btn">Concluir</a>
+                                    <a href="{{ route('list.edit', ['uuid' => $list->uuid]) }}" class="btn btn-secondary mb-2 me-2 flex-grow-1">Editar</a>
+                                    <form action="{{ route('list.destroy', ['uuid' => $list->uuid]) }}" method="POST" class="d-grid gap-2 col-6 mx-auto">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger mb-2 flex-grow-1 d-grid">Deletar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -42,6 +46,25 @@
     </div>
 </main>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.conclude-btn').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                var cardBody = button.closest('.card-body');
+                var title = cardBody.querySelector('.card-title');
+                var description = cardBody.querySelector('.card-text');
+
+                // Altera a cor para verde
+                title.style.color = 'green';
+                description.style.color = 'green';
+            });
+        });
+    });
+    </script>
+
+
 <style>
 .custom-orange {
     background-color: #ff8c00 !important; /* Orange */
@@ -53,6 +76,18 @@
     background-color: #e67e22 !important; /* Darker Orange */
     border-color: #e67e22 !important; /* Darker Orange */
     color: #fff !important; /* White */
+}
+
+.conclude-btn {
+    background-color: #28a745; /* Verde */
+    border-color: #28a745; /* Verde */
+    color: #fff; /* Branco */
+}
+
+.conclude-btn:hover {
+    background-color: #218838; /* Verde mais escuro */
+    border-color: #1e7e34; /* Verde mais escuro */
+    color: #fff; /* Branco */
 }
 
 /* Estilos para a paginação */

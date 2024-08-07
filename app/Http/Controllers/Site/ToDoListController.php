@@ -75,18 +75,70 @@ class ToDoListController extends Controller
     }
 
 
-    public function edit(ToDoList $toDoList)
+    public function edit($uuid)
     {
+
+        try {
+            $list = ToDoList::where('uuid', $uuid)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('message', 'Atividade não encontrada!');
+        }
+
+        if(!isset($list)){
+            return redirect()->back()->with("message", "Atividade não encontrada!");
+        }
+
+        return view("List.edit",[
+            "title" => "Editar Atividade",
+            "list"  => $list
+        ]);
+
 
     }
 
-    public function update(Request $request, ToDoList $toDoList)
+    public function update(Request $request)
     {
+        try {
+            $list = ToDoList::where('uuid', $request->uuid)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('message', 'Atividade não encontrada!');
+        }
 
+        $request->validate([
+            'titulo' => 'required|max:30|min:3',
+            'descricao' => 'required|max:150|min:3'
+        ], [
+            'titulo.required' => 'Esse campo é obrigatório',
+            'titulo.max' => 'O título não pode ter mais de 30 caracteres',
+            'titulo.min' => 'O título deve ter pelo menos 3 caracteres',
+            'descricao.required' => 'Esse campo é obrigatório',
+            'descricao.max' => 'A descrição não pode ter mais de 150 caracteres',
+            'descricao.min' => 'A descrição deve ter pelo menos 3 caracteres'
+        ]);
+
+        $list->update([
+            'titulo' => $request->titulo,
+            'descricao' => $request->descricao
+        ]);
+
+        return redirect()->route('list.index')->with('message', 'Atividade ' . $list->titulo . ' editada com sucesso');
     }
 
-    public function destroy(ToDoList $toDoList)
-    {
 
+    public function destroy($uuid)
+    {
+        try {
+            $list = ToDoList::where('uuid', $uuid)->firstOrFail();
+        } catch (ModelNotFoundException) {
+            return redirect()->back()->with('message', 'Atividade não encontrada!');
+        }
+
+        if(!isset($list)){
+            return redirect()->back()->with("message", "Atividade não encontrada!");
+        }
+
+        $list->delete();
+
+        return redirect()->back()->with("message", "Atividade " . $list->titulo . " deletada com sucesso");
     }
 }

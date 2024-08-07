@@ -52,11 +52,11 @@
     <x-toast />
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid m-2">
-            <a class="navbar-brand text-light ms-auto" href="#">TodoList</a>
+            <a class="navbar-brand text-light m-2 ms-5" href="#">TodoList</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse me-5" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('site.home') ? 'active' : '' }}" href="{{ route('site.home') }}" role="tab" aria-selected="true">
