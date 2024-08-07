@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if(Auth::check()){
-        return redirect()->back();
+        return to_route("list.index");
     }else{
         return view('Site.home');
     }
