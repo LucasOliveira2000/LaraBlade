@@ -68,15 +68,19 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name'      => 'required',
+            'name'      => 'required|max:60|min:4',
             'email'     => 'required|unique:users|email',
-            'password'  => 'required',
+            'password'  => 'required|max:60|min:8',
         ], [
             'name.required'     => 'O campo nome é obrigatório.',
+            'name.max'          => 'O campo nome tem que ter no máximo 60 caracteres.',
+            'name.min'          => 'O campo nome tem que ter no minimo 4 caracteres',
             'email.required'    => 'O campo email é obrigatório.',
             'email.unique'      => 'O email já está em uso.',
             'email.email'       => 'O Formato do email é invalido.',
             'password.required' => 'O campo senha é obrigatório.',
+            'password.max'      => 'O campo senha tem que ter no máximo 60 caracteres.',
+            'password.min'      => 'O campo senha tem que ter no minimo 8 letras, simbolos ou numeros.'
         ]);
 
         $userData = [

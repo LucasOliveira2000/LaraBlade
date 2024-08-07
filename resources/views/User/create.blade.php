@@ -11,27 +11,27 @@
         </div>
         <div class="mb-3">
             <label class="form-label text-black fs-5">Nome Completo</label>
-            <input name="name" type="text" class="form-control rounded-5 @error('name') is-invalid @enderror" placeholder="Digite seu nome completo" value="{{ old('name') }}" required>
+            <input name="name" type="text" class="form-control rounded-5" placeholder="Digite seu nome completo" value="{{ old('name') }}" required>
             @error('name')
-                <div class="invalid-feedback">
+                <div class="text-white">
                     {{ $message }}
                 </div>
             @enderror
         </div>
         <div class="mb-3">
             <label class="form-label text-black fs-5">Email</label>
-            <input name="email" type="email" class="form-control rounded-5 @error('email') is-invalid @enderror" placeholder="exemplo@gmail.com" value="{{ old('email') }}" required>
+            <input name="email" type="email" class="form-control rounded-5" placeholder="exemplo@gmail.com" value="{{ old('email') }}" required>
             @error('email')
-                <div class="invalid-feedback">
+                <div class="text-white">
                     {{ $message }}
                 </div>
             @enderror
         </div>
         <div class="mb-3">
             <label class="form-label text-black fs-5">Senha</label>
-            <input name="password" type="password" class="form-control rounded-5 @error('password') is-invalid @enderror" placeholder="Digite números e símbolos" required>
+            <input name="password" type="password" class="form-control rounded-5" placeholder="Digite números e símbolos" required>
             @error('password')
-                <div class="invalid-feedback">
+                <div class="text-white">
                     {{ $message }}
                 </div>
             @enderror
