@@ -12,10 +12,16 @@
             <div class="mb-3">
                 <label class="form-label text-black fs-5">Título</label>
                 <input type="text" class="form-control rounded-5" name="titulo" placeholder="Estudar Docker à Noite!" value="{{ $list->titulo }}" required>
+                @error("titulo")
+                    <div class="text-white z-1">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label text-black fs-5">Descrição da Atividade</label>
                 <textarea class="form-control rounded-5 border-1 no-resize" name="descricao" placeholder="Estudar a estrutura e o básico do Docker." rows="5" required> {{ $list->descricao }} </textarea>
+                @error("descricao")
+                    <div class="text-white z-1">{{ $message }}</div>
+                @enderror
             </div>
             <div class="d-grid gap-2 mt-4">
                 <button type="submit" class="btn btn-primary rounded-5 rounded-bottom-1 custom-orange">

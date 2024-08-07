@@ -17,7 +17,7 @@ class ToDoListController extends Controller
     {
         try {
             $lists = ToDoList::where("user_id", Auth::user()->id)->where("ativo", 1)->paginate(6);
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return redirect()->route("list.index")->with("message", "Você não tem nenhuma tarefa");
         }
 
