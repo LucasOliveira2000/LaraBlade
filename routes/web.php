@@ -2,15 +2,10 @@
 
 use App\Http\Controllers\Site\ToDoListController;
 use App\Http\Controllers\User\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    if(Auth::check()){
-        return to_route("list.index");
-    }else{
-        return view('Site.home');
-    }
+    return view('Site.home');
 })->name('site.home');
 
 Route::middleware(["autenticador"])->controller(ToDoListController::class)->prefix("list")->group(function(){
