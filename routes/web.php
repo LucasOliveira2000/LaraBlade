@@ -4,6 +4,7 @@ use App\Http\Controllers\Site\ToDoListController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('Site.home');
 })->name('site.home');
@@ -24,7 +25,7 @@ Route::controller(UserController::class)->prefix("user")->group( function(){
     Route::get("/create", "create")->name("user.create");
     Route::post("/logar", "logar")->name("user.logar");
     Route::post("/register", "register")->name("user.register");
-    Route::delete("/destroy", "destroy")->name("user.destroy");
+    Route::post("/destroy", "destroy")->name("user.destroy");
 });
 
 Route::fallback( function(){

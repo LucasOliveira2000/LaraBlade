@@ -1,4 +1,4 @@
-@extends('Layouts.auth')
+@extends('Layouts.app')
 
 @section('title', $title)
 @section('content')
